@@ -10,18 +10,14 @@ pipeline {
             } 
         } 
  
-        stage('Trivy Scan') { 
-            steps { 
-                sh ''' 
-                    rm -f "$WORKSPACE/trivy-report.txt" 
- 
-                    trivy image \ 
-                    --format table \ 
-                    --output "$WORKSPACE/trivy-report.txt" \ 
-                    blog:latest 
-                ''' 
-            } 
-        } 
+        stage('Trivy Scan') {
+    steps {
+        sh '''
+            rm -f "$WORKSPACE/trivy-report.txt"
+            trivy image --format table --output "$WORKSPACE/trivy-report.txt" blog:latest
+        '''
+    }
+} 
  
         stage('OWASP Dependency Check') { 
             steps { 
